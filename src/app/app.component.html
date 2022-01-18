@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<style>
+</style>
+
+<head>
+	<meta charset="utf-8">
+	<title>Erik Soda Calc</title>
+	<link rel="stylesheet" href="app.component.css">
+</head>
+
+<body>
+	<div>
+		<fieldset id="units" class="input-group">
+			<legend>Units</legend>
+			<input type="text" id="unit1quantity" class="unit-quantity" [(ngModel)]="units.unit1.quantity"> <label for="unit1quantity"> unit1 </label> <input type="text" id="unit1op" class="unit-op-dp" [(ngModel)]="units.unit1.op"> / <input type="text" id="unit1dp" class="unit-op-dp" [(ngModel)]="units.unit1.dp"><br>
+			<input type="text" id="unit2quantity" class="unit-quantity" [(ngModel)]="units.unit2.quantity"> <label for="unit2quantity"> unit2 </label> <input type="text" id="unit2op" class="unit-op-dp" [(ngModel)]="units.unit2.op"> / <input type="text" id="unit2dp" class="unit-op-dp" [(ngModel)]="units.unit2.dp"><br>
+			<input type="text" id="unit3quantity" class="unit-quantity" [(ngModel)]="units.unit3.quantity"> <label for="unit3quantity"> unit3 </label> <input type="text" id="unit3op" class="unit-op-dp" [(ngModel)]="units.unit3.op"> / <input type="text" id="unit3dp" class="unit-op-dp" [(ngModel)]="units.unit3.dp"><br>
+			<input type="text" id="unit4quantity" class="unit-quantity" [(ngModel)]="units.unit4.quantity"> <label for="unit4quantity"> unit4 </label> <input type="text" id="unit4op" class="unit-op-dp" [(ngModel)]="units.unit4.op"> / <input type="text" id="unit4dp" class="unit-op-dp" [(ngModel)]="units.unit4.dp"><br>
+			<input type="text" id="unit5quantity" class="unit-quantity" [(ngModel)]="units.unit5.quantity"> <label for="unit5quantity"> unit5 </label> <input type="text" id="unit5op" class="unit-op-dp" [(ngModel)]="units.unit5.op"> / <input type="text" id="unit5dp" class="unit-op-dp" [(ngModel)]="units.unit5.dp"><br>
+		</fieldset>
+
+		<fieldset id="mods" class="input-group">
+			<legend>Mods</legend>
+			<label for="prestige">Prestige </label><input type="text" id="prestige" class="short-input" [(ngModel)]="miscMods.prestige">
+			<label for="morale">&emsp; Morale </label><input type="text" id="morale" class="short-input" [(ngModel)]="miscMods.morale">
+			<p></p>
+
+			<table class="standard-modifiers">
+				<tr>
+					<th></th>
+					<th>Imps</th>
+					<th>Buildings</th>
+					<th>Advances</th>
+					<th>Other</th>
+				</tr>
+				<tr>
+					<td class="row-label">Defense</td>
+					<td><input type="text" id="dpImps" class="short-input" [(ngModel)]="opMods.imps"></td>
+					<td><input type="text" id="dpBuildingMultiplier" class="real-short-input" value="1.8" [(ngModel)]="opMods.bldgMult"> * <input type="text" id="opBuildingPercentage" class="short-input" [(ngModel)]="opMods.bldgPercent"></td>
+					<td><input type="text" id="dpAdvances" class="short-input" [(ngModel)]="opMods.advances"></td>
+					<td><input type="text" id="dpOther" class="short-input" [(ngModel)]="opMods.other"></td>
+				</tr>
+				<tr>
+					<td class="row-label">Offense</td>
+					<td><input type="text" id="opImps" class="short-input" [(ngModel)]="dpMods.imps"></td>
+					<td><input type="text" id="opBuildingMultiplier" class="real-short-input" value="1.8" [(ngModel)]="dpMods.bldgMult"> * <input type="text" id="opBuildingPercentage" class="short-input" [(ngModel)]="dpMods.bldgPercent"></td>
+					<td><input type="text" id="opAdvances" class="short-input" [(ngModel)]="dpMods.advances"></td>
+					<td><input type="text" id="opOther" class="short-input" [(ngModel)]="dpMods.other"></td>
+				</tr>
+			</table>
+			<br>
+			<table class="misc-modifiers">
+				<tr>
+					<td><label for="ambush">Ambush </label><input type="checkbox" id="ambush" [(ngModel)]="miscMods.ambush"></td>
+					<td><label for="ambush">Glaciers </label><input type="text" id="glaciers" [(ngModel)]="miscMods.glaciers"></td>
+				</tr>
+			</table>
+			<br>
+
+			<table class="mod-modifiers">
+				<tr>
+					<td><label for="myTemples">My temples </label></td>
+					<td><input type="text" id="myTemples" [(ngModel)]="miscMods.myTemples"></td>
+					<td><label for="myMinusMods">My -mods </label></td>
+					<td><input type="text" id="myMinusMods" [(ngModel)]="miscMods.myMinusMods"></td>
+				</tr>
+			</table>
+			<br>
+			<table class="mod-modifiers">
+				<tr>
+					<td><label for="theirTemples">Their temples </label></td>
+					<td><input type="text" id="theirTemples" [(ngModel)]="miscMods.theirTemples"></td>
+					<td><label for="theirMinusMods">Their -mods </label></td>
+					<td><input type="text" id="theirMinusMods" [(ngModel)]="miscMods.theirMinusMods"></td>
+				</tr>
+			</table>
+		</fieldset>
+		<br>
+
+		<label for="minDpLeftHome">Minimum DP kept home </label><input type="text" class="unit-quantity" id="minDpLeftHome" [(ngModel)]="minDpLeftHome" (change)="onChangeMinDp()">
+		<br><br>
+		<button id="calcIt" (click)="onCalcIt()">CALC IT</button>
+		<br><br>
+		<table class="output">
+			<tr>
+				<td>Raw DP</td>
+				<td><input readonly="true" id="raw-dp" value="{{rawDp}}"></td>
+			</tr>
+			<tr>
+				<td>Modded DP</td>
+				<td><input readonly="true" id="modded-dp" value="{{moddedDp}}"></td>
+			</tr>
+			<tr>
+				<td>Reduced DP</td>
+				<td><input readonly="true" id="reduced-dp" value="{{reducedDp}}"></td>
+			</tr>
+		</table>
+		<br>
+		<input readonly="true" id="discordOutput" value="{{fourThree}}">
+	</div>
+</body>
+
+</html>

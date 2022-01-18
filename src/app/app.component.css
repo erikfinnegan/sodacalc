@@ -1,0 +1,82 @@
+body {
+    font-family: Tahoma, sans-serif;
+    width: 500px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: whitesmoke;
+}
+
+input {
+    width: 60px;
+}
+
+fieldset {
+    width: fit-content;
+}
+
+fieldset legend {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+table td {
+    padding: 0 8px;
+}
+
+.unit-quantity {
+    width: 100px;
+}
+
+.unit-op-dp {
+    width: 80px;
+}
+
+.real-short-input {
+    width: 20px;
+}
+
+.row-label {
+    padding: 0px;
+}
+
+.mod-modifiers td {
+    padding: 0 2px;
+}
+
+.misc-modifiers {
+    padding: 0px;
+}
+
+.misc-modifiers input[type="checkbox"] {
+    width: auto;
+}
+
+.pad-me {
+    margin-right: 30px;
+}
+
+.output {
+    font-size: 16px;
+}
+
+.output input {
+    font-size: 16px;
+    width: 120px;
+}
+
+#reduced-dp {
+    background-color:lightgoldenrodyellow;
+}
+
+#prestige {
+    margin-right: 20px;
+}
+
+#calcIt {
+    height: 42px;
+    width: 100px;
+}
+
+#discordOutput {
+    width: 300px;
+}
